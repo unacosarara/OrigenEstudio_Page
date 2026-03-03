@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Origen Estudio</title>
+  <style>
+    /* Reset */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-primary: #1a1a2e;
+      --color-accent: #e94560;
+      --color-bg: #ffffff;
+      --color-text: #333333;
+      --color-text-light: #666666;
+      --color-border: #e0e0e0;
+      --header-height: 72px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height);
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+    }
+
+    .header__logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .header__nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .header__nav-list {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .header__nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--color-text-light);
+      transition: color 0.2s ease;
+      padding: 0.25rem 0;
+      position: relative;
+    }
+
+    .header__nav-link:hover {
+      color: var(--color-accent);
+    }
+
+    .header__nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-accent);
+      transition: width 0.3s ease;
+    }
+
+    .header__nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Spacer to balance the logo on the left so nav stays centered */
+    .header__spacer {
+      width: 0;
+      flex-shrink: 0;
+    }
+
+    /* Mobile menu toggle */
+    .header__toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      margin-left: auto;
+    }
+
+    .header__toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--color-primary);
+      margin: 6px 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .header__toggle.active span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .header__toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .header__toggle.active span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: calc(var(--header-height) + 2rem) 2rem 4rem;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f0 100%);
+    }
+
+    .hero__content {
+      max-width: 720px;
+    }
+
+    .hero__title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: var(--color-primary);
+      margin-bottom: 1.25rem;
+      line-height: 1.15;
+    }
+
+    .hero__subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--color-text-light);
+      margin-bottom: 2.5rem;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero__cta {
+      display: inline-block;
+      padding: 0.85rem 2.5rem;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero__cta:hover {
+      background: #d63451;
+      transform: translateY(-2px);
+    }
+
+    /* Sections */
+    .section {
+      padding: 5rem 2rem;
+    }
+
+    .section--alt {
+      background: #f9fafb;
+    }
+
+    .section__title {
+      text-align: center;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+    }
+
+    .section__subtitle {
+      text-align: center;
+      color: var(--color-text-light);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      font-size: 1.05rem;
+    }
+
+    /* Features grid */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    .feature-card:hover {
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+    }
+
+    .feature-card__icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card__title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card__text {
+      font-size: 0.95rem;
+      color: var(--color-text-light);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-light);
+      font-size: 0.875rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header {
+        padding: 0 1.25rem;
+      }
+
+      .header__toggle {
+        display: block;
+      }
+
+      .header__nav {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background: var(--color-bg);
+        border-bottom: 1px solid var(--color-border);
+        padding: 1rem 0;
+        transform: translateY(-120%);
+        transition: transform 0.3s ease;
+        justify-content: center;
+      }
+
+      .header__nav.open {
+        transform: translateY(0);
+      }
+
+      .header__nav-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .header__nav-link {
+        font-size: 1.1rem;
+        padding: 0.5rem 0;
+      }
+
+      .hero {
+        padding: calc(var(--header-height) + 1.5rem) 1.25rem 3rem;
+      }
+
+      .section {
+        padding: 3.5rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="/" class="header__logo">Origen Estudio</a>
+
+    <nav class="header__nav" id="nav">
+      <ul class="header__nav-list">
+        <li><a href="#inicio" class="header__nav-link">Inicio</a></li>
+        <li><a href="#servicios" class="header__nav-link">Servicios</a></li>
+        <li><a href="#nosotros" class="header__nav-link">Nosotros</a></li>
+        <li><a href="#contacto" class="header__nav-link">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <button class="header__toggle" id="menuToggle" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="inicio">
+    <div class="hero__content">
+      <h1 class="hero__title">Bienvenido a Origen Estudio</h1>
+      <p class="hero__subtitle">Creamos experiencias digitales únicas que impulsan tu marca al siguiente nivel.</p>
+      <a href="#servicios" class="hero__cta">Conoce más</a>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section class="section section--alt" id="servicios">
+    <h2 class="section__title">Servicios</h2>
+    <p class="section__subtitle">Soluciones a medida para cada necesidad de tu negocio.</p>
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-card__icon">&#9998;</div>
+        <h3 class="feature-card__title">Diseño</h3>
+        <p class="feature-card__text">Interfaces modernas y atractivas que conectan con tu audiencia.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon">&#9775;</div>
+        <h3 class="feature-card__title">Desarrollo</h3>
+        <p class="feature-card__text">Código limpio y escalable para proyectos de cualquier tamaño.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon">&#9733;</div>
+        <h3 class="feature-card__title">Estrategia</h3>
+        <p class="feature-card__text">Planes efectivos que alinean tecnología y objetivos de negocio.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nosotros -->
+  <section class="section" id="nosotros">
+    <h2 class="section__title">Nosotros</h2>
+    <p class="section__subtitle">Somos un equipo apasionado por la tecnología y el diseño. Nos dedicamos a construir productos digitales que generan impacto real.</p>
+  </section>
+
+  <!-- Contacto -->
+  <section class="section section--alt" id="contacto">
+    <h2 class="section__title">Contacto</h2>
+    <p class="section__subtitle">¿Tienes un proyecto en mente? Escríbenos y hagamos algo increíble juntos.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 Origen Estudio. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('nav');
+
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      nav.classList.toggle('open');
+    });
+
+    // Close menu when clicking a nav link (mobile)
+    document.querySelectorAll('.header__nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.classList.remove('active');
+        nav.classList.remove('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
