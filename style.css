@@ -5,13 +5,11 @@
   src: url('txt/Gotham-Black.otf') format('opentype');
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Gotham2';
   src: url('txt/Gotham-Light.otf') format('opentype');
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Gotham3';
   src: url('txt/GothamCond-Medium.otf') format('opentype');
@@ -30,24 +28,13 @@
   padding: 0 5%;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
+  background-color: transparent;
   display: flex;
   box-shadow: 0 2px 40px rgba(0,0,0,0.1);
   z-index: 1000;
-  position: relative;
+  position: absolute;
 }
 
-.nav-menu a {
-  font-family: 'Gotham2';
-  font-weight: 100;
-  color: #fff;
-  text-decoration: none;
-}
-.nav-menu li {
-  padding: 5px 5px;
-  margin: 0 0.5rem;
-  background-color: rgb(131, 131, 131);
-}
 .nav-menu {
   display: flex;
   flex: 1;                /* crecer para compartir el espacio disponible */
@@ -55,9 +42,27 @@
   justify-content: center; /* centrar los enlaces dentro de cada nav */
 }
 .nav-menu ul {
+  min-width: 390px;
   list-style: none;
   display: flex;
   align-items: center;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+.nav-menu li {
+  padding: 5px 5px;
+  margin: 0 0.5rem;
+  background-color: #01C38D;
+  border-radius: 5px;
+  box-shadow: #01C38D 0px 0px 9px 0px ;
+  outline: #ffffff6b 1px solid;
+}
+.nav-menu a {
+  font-family: 'Gotham2';
+  font-weight: 100;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .logo {
@@ -65,6 +70,12 @@
   width: auto;
   display: block;
   flex: 0 0 auto; /* no estirar */
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Estilos del menú hamburguesa */
@@ -84,23 +95,8 @@
   margin: 3px 0;
   transition: 0.3s;
 }
-
 .nav-container {
   display: none;
-}
-
-.nav-menu {
-  display: flex;
-}
-
-.nav-menu ul {
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-}
-
-.nav-menu li {
-  margin: 0 0.5rem;
 }
 
 @media (max-width: 1000px) {
